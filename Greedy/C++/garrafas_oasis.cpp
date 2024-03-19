@@ -1,29 +1,14 @@
-/*
-    Esse exercício produz a maior quantidade possível de garrafas para um número de litros disponível.
-
-    Pode-se adaptar a historinha para ser o menor número de garrafas possíveis, e mudar o código para sort ao contrário.
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
-	int t;
 
-	cin >> t;
+class Solution {
+public:
+    int maximumBottles(int n, int x, vector<int>& v) {
+        sort(v.begin(), v.end());
 
-	int n, x, ans = 0;
-	while(t--){
-		cin >> n >> x;
-
-		int v[n];
-
-		for(int i = 0; i < n; i++)
-			cin >> v[i];
-
-		sort(v, v+n);
-
-		ans = 0;
+		int ans = 0;
 		for(int i = 0; i < n; i++){
+			// if there's water left to fill a full bottle
 			if(x - v[i] >= 0){
 				x -= v[i];
 				ans++;
@@ -31,7 +16,25 @@ int main() {
 			else
 				break;
 		}
+        return ans;
+    }
+};
 
-		cout << ans << endl;
+int main() {
+	int t;
+
+	cin >> t;
+
+	int n, x;
+	Solution solve;
+	while(t--){
+		cin >> n >> x;
+
+		vector<int> v(n);
+
+		for(int i = 0; i < n; i++)
+			cin >> v[i];
+
+		cout << solve.maximumBottles(n, x, v) << endl;
 	}
 }

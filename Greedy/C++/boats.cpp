@@ -10,12 +10,12 @@ public:
 
         int boats = 0;
         while(l <= r) {
-            // cabem duas pessoas
+            // fit two people in one boat
             if(people[r] + people[l] <= limit){
                 l++;
                 r--;
             }
-            // cabe somente a pessoa mais pesada
+            // only fit the heaviest
             else if(people[r] <= limit){
                 r--;
             }
