@@ -4,39 +4,33 @@ using namespace std;
 class Solution {
 public:
     bool lemonadeChange(vector<int>& bills) {
-        int my_bills[3] = {0, 0, 0};
+        map<int, int> myBills;
+        myBills[5] = 0;
+        myBills[10] = 0;
+        myBills[20] = 0;
 
-        bool ans = true;
-        for(int i = 0; i < bills.size(); i++){
-            // adiciona a nota recebida nas nossas notas
-            if(bills[i] == 5) my_bills[0]++;
-            else if(bills[i] == 10) my_bills[1]++;
-            else if(bills[i] == 20) my_bills[2]++;
+        for (int bill : bills) {
+            // Adiciona a nota recebida ao nosso controle
+            myBills[bill]++;
 
-            int change = bills[i] - 5;
+            int change = bill - 5;
 
-            // guloso: devolve notas comecando por 20, depois 10, depois 5
-            int bill_index = 2;
-            while(change > 0) {
-                int current_value;
-                // descobre valor da nota atual
-                if(bill_index == 2) current_value = 20;
-                else if(bill_index == 1) current_value = 10;
-                else if(bill_index == 0) current_value = 5;
-                
-                if(bill_index < 0)
-                    return false;
-                // se nota for alta demais ou nao tivermos nota desse tipo
-                if(change - current_value < 0 || my_bills[bill_index] == 0)
-                    bill_index--;
-                // selecionamos nota para o troco
-                else{
-                    change -= current_value;
-                    my_bills[bill_index]--;
+            // Tentativas de dar o troco, começando com cédulas de maior valor
+            vector<int> values = {20, 10, 5};
+            for (int value : values) {
+                while (change >= value && myBills[value] > 0) {
+                    myBills[value]--;
+                    change -= value;
                 }
+            }
+
+            // Se após tentar dar o troco ainda resta valor, retorna false
+            if (change > 0) {
+                return false;
             }
         }
 
+        // Se foi possível dar o troco em todos os casos, retorna true
         return true;
     }
 };
