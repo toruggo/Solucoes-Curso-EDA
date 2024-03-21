@@ -2,7 +2,7 @@
  * @param {number} n
  * @return {number}
  */
-var minimumScarecrows = function(n, tasks) {
+var maximumReward = function(n, tasks) {
     tasks.sort((a, b) => a.first - b.first);
     
     let reward = 0, time = 0;

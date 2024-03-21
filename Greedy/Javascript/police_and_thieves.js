@@ -1,7 +1,7 @@
 /**
  * @param {number[]} arr
- * @param {number} N
- * @param {number} K
+ * @param {number} n
+ * @param {number} k
  * @returns {number}
 */
 var catchThieves = function(arr, n, k)
