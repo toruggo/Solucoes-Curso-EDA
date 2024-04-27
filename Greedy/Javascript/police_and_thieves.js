@@ -1,5 +1,5 @@
 /**
- * @param {number[]} arr
+ * @param {char[]} arr
  * @param {number} n
  * @param {number} k
  * @returns {number}
